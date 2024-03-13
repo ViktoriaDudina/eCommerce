@@ -1,0 +1,42 @@
+{% block stylesheets %}
+
+<link rel="stylesheet" href="{{ asset('public/sale_carousal.css') }}" />
+{% endblock %} {% block body %}
+<div class="container pt-5 pb-5">
+  <div class="container nextcont">
+    <h2 class="text-center carh2">Top Viewed</h2>
+    <hr class="w-25 mx-auto mb-5 mb-xl-9" />
+    <swiper-container
+      class="mySwiper"
+      navigation="true"
+      slides-per-view="4"
+      space-between="10"
+    >
+      {% for topView in topViews %}
+        
+      <swiper-slide>
+        <div class="card" style="width: 10rem">
+          <a href="{{ path('app_product_details', { id: topView.id }) }}">
+            <img
+              src="{{asset('uploads/products/' ~ topView.image)}}"
+              class="card-img-top"
+              alt="Image"
+            />
+          </a>
+          <div class="card-body">
+            <h6 class="card-title">{{topView.title}}</h6>
+            <p class="card-text pcar">${{topView.price}}</p>
+          </div>
+        </div>
+      </swiper-slide>
+      {% endfor %}
+
+
+    </swiper-container>
+  </div>
+  {% endblock %} {% block javascripts %}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js" async></script>
+  <script src="public/public/js/sale_carousal.js" async></script>
+
+  {% endblock %}
+</div>

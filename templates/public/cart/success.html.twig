@@ -1,0 +1,28 @@
+{% extends 'public/index.html.twig' %} {% block title %} Order Succeeded {%
+endblock %} {% block content %}
+<div class="container my-5 vh-100">
+  <div class="row align-items-center">
+    <!-- Left Side: User Information and Thank You Message -->
+    <div class="col-md-6">
+      <h2>Thank You, {{ user.name }}!</h2>
+      <p>
+        Your order has been placed successfully. We are currently processing it
+        and will notify you once it's on the way.
+      </p>
+      <p>
+        If you have any questions about your order, please feel free to
+        <a href="">contact us</a>.
+      </p>
+    </div>
+
+    <!-- Right Side: Success Image -->
+    <div class="col-md-6">
+      <img
+        src="{{ asset('uploads/success.png') }}"
+        class="img-fluid"
+        alt="Order Successful"
+      />
+    </div>
+  </div>
+</div>
+{% endblock %}

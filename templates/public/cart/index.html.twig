@@ -1,0 +1,220 @@
+{% extends 'public/index.html.twig' %} {% block title %} Cart {% endblock %} {%
+block content %}
+<div class="container my-5 vh-100">
+  <div class="row">
+    <!-- Cart Items Column -->
+    <div class="col-xl-8">
+      {% if cartItems %} {% for item in cartItems %}
+      <div class="card mb-3 shadow-lg">
+        <div class="card-body">
+          <div class="row g-3 align-items-center">
+            <!-- Product Image -->
+            <div class="col-auto">
+              <img
+                src="{{ asset('uploads/products/' ~ item.product.image) }}"
+                alt="{{ item.product.title }}"
+                class="img-fluid rounded"
+                style="width: 100px"
+              />
+            </div>
+            <!-- Product Details -->
+            <div class="col">
+              <h5 class="card-title mb-1">{{ item.product.title }}</h5>
+              <p class="card-text text-muted">
+                {# Display product ratings here if available #}
+              </p>
+            </div>
+            <!-- Product Price -->
+            <div class="col-md-3 text-md-end">
+              <p class="mb-2"><small>Price</small></p>
+              <h6 class="fw-bold">
+                {{ item.product.price | number_format(2) }} €
+              </h6>
+            </div>
+            <!-- Quantity Controls -->
+            <div class="col-md-3 text-md-end">
+              <div class="d-flex align-items-center">
+                <button
+                  class="btn btn-outline-secondary btn-sm change-quantity"
+                  data-action="decrease"
+                  data-cartitemid="{{ item.id }}"
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  class="form-control mx-2 quantity-input"
+                  value="{{ item.quantity }}"
+                  readonly
+                  style="width: 50px"
+                />
+                <button
+                  class="btn btn-outline-secondary btn-sm change-quantity"
+                  data-action="increase"
+                  data-cartitemid="{{ item.id }}"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Remove Button -->
+          <div class="mt-3 text-end">
+            <a
+              href="{{ path('app_remove_from_cart', { cartItemId: item.id }) }}"
+              class="btn btn-outline-danger btn-sm"
+            >
+              <i class="mdi mdi-trash-can-outline"></i> Remove
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <p class="text-center">Your cart is empty.</p>
+      {% endif %}
+    </div>
+
+    <!-- Order Summary Sidebar -->
+    <div class="col-md-4">
+      <div class="card mt-4 mt-xl-0">
+        <h5 class="card-header bg-orange text-white">Summary</h5>
+        <ul class="list-group list-group-flush">
+          {% for item in cartItems %}
+          <li class="list-group-item">
+            <div class="d-flex justify-content-between">
+              <span id="item-title-{{ item.id }}"
+                >{{ item.product.title }} (x<span
+                  id="item-quantity-{{ item.id }}"
+                  >{{ item.quantity }}</span
+                >)</span
+              >
+              <span
+                id="item-total-{{ item.id }}"
+                data-price="{{ item.product.price }}"
+                >{{ (item.product.price * item.quantity) | number_format(2) }}
+                €</span
+              >
+            </div>
+          </li>
+          {% endfor %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span><strong>Total</strong></span>
+            <span class="cart-summary-total"
+              ><strong>{{ total }} €</strong></span
+            >
+          </li>
+        </ul>
+        <div class="card-body">
+          <a
+            href="{{ path('app_checkout') }}"
+            class="btn btn-outline-dark w-100"
+            >Checkout</a
+          >
+          <div class="d-flex justify-content-center pt-3">
+            <button class="btn btn-warning clear-cart">Clear All</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".change-quantity").forEach(function (button) {
+          button.addEventListener("click", function () {
+              const cartItemId = this.getAttribute("data-cartitemid");
+              const action = this.getAttribute("data-action");
+              const input = this.closest(".d-flex").querySelector(".quantity-input");
+              let newQuantity = parseInt(input.value);
+
+              if (action === "increase") {
+                  newQuantity++;
+              } else if (action === "decrease" && newQuantity > 1) {
+                  newQuantity--;
+              }
+
+              if (!isNaN(newQuantity) && newQuantity >= 0) {
+                  input.value = newQuantity;
+                  updateCartQuantity(cartItemId, newQuantity);
+              } else {
+                  console.error("Invalid Quantity:", newQuantity);
+              }
+          });
+      });
+
+      function updateCartQuantity(cartItemId, newQuantity) {
+          const url = "{{ path('app_update_cart', {'cartItemId': '0'}) }}".replace('0', cartItemId);
+          fetch(url, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  "X-Requested-With": "XMLHttpRequest",
+              },
+              body: JSON.stringify({ quantity: newQuantity }),
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Update item quantity in the UI
+                  const itemQuantity = document.getElementById('item-quantity-' + cartItemId);
+                  if (itemQuantity) {
+                      itemQuantity.textContent = newQuantity;
+                  }
+
+                  // Update item subtotal in the UI
+                  const itemTotal = document.getElementById('item-total-' + cartItemId);
+                  if (itemTotal) {
+                      const price = parseFloat(itemTotal.getAttribute('data-price'));
+                      itemTotal.textContent = (price * newQuantity).toFixed(2) + ' €';
+                  }
+
+                  // Update the overall cart total
+                  updateTotalPrice(data.newTotal);
+              } else {
+                  console.error("Error:", data.message);
+              }
+          })
+          .catch(error => {
+              console.error("Error:", error);
+          });
+      }
+
+      function updateTotalPrice(newTotal) {
+          const totalPriceElement = document.querySelector(".cart-summary-total strong");
+          totalPriceElement.textContent = newTotal.toFixed(2) + " €";
+      }
+
+      const clearCartButton = document.querySelector('.clear-cart');
+      if (clearCartButton) {
+          clearCartButton.addEventListener('click', function () {
+              if (confirm('Are you sure you want to clear your cart?')) {
+                  clearCart();
+              }
+          });
+      }
+
+      function clearCart() {
+          fetch('{{ path('app_clear_cart') }}', {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  "X-Requested-With": "XMLHttpRequest",
+              },
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  window.location.reload();
+              } else {
+                  alert("Error clearing cart: " + data.message);
+              }
+          })
+          .catch(error => {
+              console.error("Error:", error);
+          });
+      }
+  });
+</script>
+
+{% endblock %}

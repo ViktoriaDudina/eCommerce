@@ -1,0 +1,89 @@
+{% extends 'public/index.html.twig' %} {% block title %}Registration{% endblock
+%} {% block content %}
+<section class="bg-light p-3 p-md-4 p-xl-5 section-register">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-xxl-11">
+        <div class="card border-light-subtle shadow-lg">
+          <div class="row g-0">
+            <div class="col-12 col-md-6">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="mb-5">
+                      <div class="text-center mb-4">
+                        <i
+                          class="fa-solid fa-shop me-2"
+                          style="color: #f7941d"
+                        ></i>
+                        <strong>BEST CLOTHES</strong>
+                      </div>
+                      <h4 class="text-center">Register and join us!</h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="d-flex gap-3 flex-column">
+                      {{ form_errors(registrationForm) }}
+
+                      {{ form_start(registrationForm) }}
+                      <div class="form-group mb-3">
+                        <label for="{{ registrationForm.email.vars.id }}"
+                          >Email</label
+                        >
+                        {{
+                          form_widget(registrationForm.email, {
+                            attr: {
+                              placeholder: "Enter your email",
+                              class: "form-control"
+                            }
+                          })
+                        }}
+                      </div>
+                      <div class="form-group mb-3">
+                        <label
+                          for="{{ registrationForm.plainPassword.vars.id }}"
+                          >Password</label
+                        >
+                        {{
+                          form_widget(registrationForm.plainPassword, {
+                            attr: {
+                              placeholder: "Enter your new Password",
+                              class: "form-control"
+                            }
+                          })
+                        }}
+                      </div>
+
+                      {{ form_row(registrationForm.agreeTerms) }}
+
+                      <div class="d-flex justify-content-center">
+                        <button
+                          type="submit"
+                          class="btn btn-outline-warning text-orange"
+                        >
+                          Register
+                        </button>
+                      </div>
+                      {{ form_end(registrationForm) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <img
+                class="img-fluid rounded-start w-100 h-100 object-fit-cover"
+                loading="lazy"
+                src="https://cdn.pixabay.com/photo/2017/06/20/22/14/man-2425121_1280.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

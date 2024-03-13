@@ -1,0 +1,122 @@
+
+
+{% extends 'admin/index.html.twig' %}
+{% block title %}
+    Users
+{% endblock %}
+
+{% block content %}
+ <!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row shadow-sm p-3 mt-2 mb-2 bg-white rounded">
+            <div class="col-sm-6">
+                <h1 class="m-0">Users <a href="{{ path('app_user_new') }}"><button class="btn btn-sm btn-primary">Add New</button></h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{path('app_admin')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item active"> Users</li>
+                </ol>
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<div class="content">
+    <div class="container-fluid">
+     {# data table starts  #}
+        <div class="card">
+
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="40px">S. NO</th>
+                            <th>Email</th>
+                            <th>Current Role</th>
+                            <th>Change Role</th>
+                            <th>Name</th>
+                            <th>Phone_number</th>
+                            <th>Status</th>
+                            <th>Created_at</th>
+                            <th>Last_login</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        {% for user in users %}
+                       
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                             <td>{{ user.email }}</td>
+                             <td>{{ user.roles is defined and 'ROLE_ADMIN' in user.roles ? 'Admin' : 'User' }}</td>
+                             <td>
+                                {% if 'ROLE_ADMIN' in user.roles %}
+                                <a href="{{ path('user_toggle_role_user', {'id': user.id}) }}"><button class="btn btn-primary">Change to User</button></a>
+                                {% else %}
+                               <a href="{{ path('user_toggle_role_admin', {'id': user.id}) }}"><button class="btn btn-primary">Change to Admin</button></a>
+                                {% endif %}
+            </td>
+                            <td>{{ user.Name }}</td>
+                            <td>{{ user.phoneNumber }}</td>
+                            <td>
+                             {% if user.status %}
+                                 <button type="button" class="btn btn-primary">Active</button>
+                             {% else %}
+                              <button type="button" class="btn btn-danger">Blocked</button>
+                             {% endif %}
+                            </td>
+                            <td>{{ user.createdAt ? user.createdAt|date('d-m-Y H:i:s') : '' }}</td>
+                            <td>{{ user.lastLogin ? user.lastLogin|date('d-m-Y H:i:s') : '' }}</td>
+
+
+                            <td class="d-flex">
+                                <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                    <button class="btn" title="Delete User"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                                {% if user.status %}
+                            <a href="{{ path('user_block', {'id': user.id}) }}"><button class="btn btn-danger">Block</button></a>
+                        {% else %}
+                            <a href="{{ path('user_unblock', {'id': user.id}) }}"><button class="btn btn-success">Unblock</button></a>
+                        {% endif %}                             
+                            </td>
+                            </tr>
+                        
+                        
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                             <th width="40px">S. NO</th>
+                            <th>Email</th>
+                            <th>Current Role</th>
+                            <th>Change Role</th>
+                            <th>Name</th>
+                            <th>Phone_number</th>
+                            <th>Status</th>
+                            <th>Created_at</th>
+                            <th>Last_login</th>
+                            <th>actions</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+         {# data tables end  #}
+
+   
+
+    </div>
+    </div>
+
+
+
+
+{% endblock %}
+

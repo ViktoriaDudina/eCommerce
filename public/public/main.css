@@ -1,0 +1,148 @@
+/* Custom Navbar */
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.bg-dark {
+    background-color: #333 !important;
+}
+
+.bg-orange {
+    background-color: #f7941d;
+}
+
+.custom-search {
+    background-color: white;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.custom-navbar_font>li>a {
+    color: white !important;
+}
+
+.custom-navbar_font>li>a:hover {
+    color: #f7941d !important;
+}
+
+.navbar-collapse>.navbar-nav {
+    align-items: center !important;
+}
+
+/* End Of Custom Navbar */
+
+
+/*Footer style*/
+.footerLink {
+    text-decoration: none;
+    color: white;
+
+}
+
+.footerLink:hover {
+    color: #F7941D;
+    cursor: pointer;
+
+}
+
+.fText {
+    transition: 1s;
+}
+
+.fText:hover {
+    transform: translate(10px, 0px);
+
+}
+
+.fab {
+    color: #f7941d;
+    transition: 1s;
+}
+
+/* End of  Footer */
+
+/* Hero Section */
+
+.text-orange {
+    color: #f7941d;
+}
+/* End Of Hero Section */
+
+/* Banners */
+
+.banh6 {
+    color: #f7941d;
+    font-size: 16px;
+    margin-left: 22px;
+    width: 100%;
+    margin-top: 4px;
+
+}
+
+.banh3 {
+    font-size: 22px;
+    margin: 0px;
+    margin-left: 30px;
+    margin-bottom: 6px;
+    width: 90%;
+}
+
+.banLink{
+    color: black;
+    position: relative;
+    font-size: 12px;
+    margin-left: 32px;
+    width: 100%;
+    transition: color 0.3s ease;
+    font-weight: bold;
+    
+}
+
+.banLink:hover {
+    color: #f7941d;
+}
+
+
+/* Banners  End */
+
+/* Branding */ 
+
+#brandCarousel .carousel-item .col img {
+    width: 200px; 
+    height: auto; 
+    object-fit: contain; 
+    margin: auto; 
+}
+
+
+#brandCarousel .carousel-item .col {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    height: 200px; 
+}
+
+/* Register - Login */ 
+
+.section-register {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.section-login {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.product-price {
+    
+    margin-left: 5px!important;
+    padding: 0;
+}

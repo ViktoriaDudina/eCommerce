@@ -1,0 +1,21 @@
+.icon-hover:hover {
+    border-color: #3b71ca !important;
+    background-color: white !important;
+    color: #3b71ca !important;
+}
+
+.icon-hover:hover i {
+    color: #3b71ca !important;
+}
+
+.buynow {
+    background-color: #f7941d;
+}
+
+.buynow:hover {
+    background-color: #f17f00;
+}
+
+.heartbtn:hover {
+    color: #f7941d !important;
+}

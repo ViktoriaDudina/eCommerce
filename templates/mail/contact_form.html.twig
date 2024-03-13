@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Thank You for Contacting Us</title>
+  </head>
+  <body
+    style="
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    "
+  >
+    <div
+      style="
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 600px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      "
+    >
+      <h2 style="color: #007bff; text-align: center">
+        Thank You for Reaching Out!
+      </h2>
+      <p>Dear {{ formData.fullname }},</p>
+
+      <p>
+        Thank you for contacting us. We have received your
+        inquiry and our team is already looking into it. We appreciate you
+        taking the time to write to us.
+      </p>
+
+      <p>Here is a summary of your inquiry for your reference:</p>
+      <blockquote
+        style="
+          font-style: italic;
+          color: #555;
+          border-left: 4px solid #007bff;
+          padding-left: 15px;">
+        <p>Subject:{{ formData.subject }}</p>
+       
+       <p> {{ formData.message }}</p>
+      </blockquote>
+
+      <p>
+      </p>
+
+    
+      <p>
+        Thank you for choosing Group 8 eCommerce. We value your business and
+        are dedicated to ensuring your complete satisfaction.
+      </p>
+
+      <p style="text-align: center">Best regards,</p>
+      <p style="text-align: center; font-weight: bold">
+        Your Customer Service Representative
+      </p>
+    </div>
+  </body>
+</html>

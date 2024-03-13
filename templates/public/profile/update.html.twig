@@ -1,0 +1,77 @@
+{% extends 'public/index.html.twig' %} 
+{% block content %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('public/user_update.css') }}"/>
+    {% endblock %}
+    <div class="container-xl pt-2 px-4 mt-4">
+
+        <div class="row">
+
+            <div class="col-xl-8">
+                <!-- Account details card-->
+                <div class="card mb-4">
+                    <div class="container rounded bg-white mt-5 mb-5">
+                        <div class="row">
+                            <div class="col-md-3 border-right">
+                                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
+                                            class="rounded-circle mt-5" width="150px"
+                                            src="{{ user.avatar ?  asset('uploads/profile/' ~ user.avatar) : asset('uploads/profile/default.jpg') }}"
+                                            alt=""><span class="font-weight-bold">{{ user.name }}</span><span
+                                            class="text-black-50">{{ user.email }}</span><span> </span></div>
+                            </div>
+                            <div class="col-md-8 border-right">
+                                <div class="p-3 pt-5">
+                                    <div class="d-flex justify-content-center align-items-center mb-5">
+                                        <h4 class="text-right">Profile Settings</h4>
+                                    </div>
+                                    {{ form_start(form) }}
+                                    <div class="row mt-2">
+                                   {{ form_row(form.Name) }}
+{#                                        <label class="mb-4 underText" for="name">Full Name (how your name will appear to other#}
+{#                                            users on the site)</label>#}
+
+                                    </div>
+                                    <div class="row mt-3">
+                                        {{ form_row(form.email) }}
+{#                                        <label class="mb-4 underText" for="inputEmailAddress">Email#}
+{#                                                address</label>#}
+                                       </div>
+                                        <div class="row mt-3 mb-3">
+                                           {{ form_row(form.phone_number) }}
+{#                                            <label class="mb-4 underText" for="inputPhone">Phone number</label>#}
+
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <div class="mb-3">
+                                                {{ form_row(form.avatar) }}
+{#                                                <label class="mb-4 underText" for="Image">Change Profile Image</label>#}
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mt-5 text-center">
+                                            <button class="btn  me-4" type="submit">Save changes</button>
+                                            {{ form_end(form) }}
+                                            <a href="{{ path('app_profile') }}">
+                                                <button class="btn">Back to Profile</button>
+                                            </a></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    </div>
+{% endblock %}

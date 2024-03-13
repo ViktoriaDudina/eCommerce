@@ -1,0 +1,60 @@
+<section class="section-products">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="header pt-3 pb-3">
+          <h1>Featured Products</h1>
+          <h2 class="text-orange">Onsale Clothes</h2>
+          <hr class="w-25 mx-auto mb-5 mb-xl-9" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for sale in on_sale %}
+      <div class="col-md-6 col-lg-4 col-xl-3">
+        <div class="single-product">
+          <div class="part-1">
+            <ul class="product-icons">
+              <li>
+                <a href="{{ path('app_add_to_cart', { productId: sale.id }) }}"
+                  ><i class="fas fa-shopping-cart"></i
+                ></a>
+              </li>
+              <li>
+                <a href="{{ path('app_add_to_wishlist', { id: sale.id }) }}"
+                  ><i class="fas fa-heart"></i
+                ></a>
+              </li>
+              <li>
+                <a href="{{ path('app_product_details', { id: sale.id }) }}"
+                  ><i class="fas fa-circle-info"></i
+                ></a>
+              </li>
+            </ul>
+            <!-- You can add your product-specific content here -->
+
+            <a href="{{ path('app_product_details', { id: sale.id }) }}">
+              <img
+                src="{{ asset('uploads/products/' ~ sale.image)  }}"
+                alt="{{ sale.title }}"
+                class="product-image"
+              />
+            </a>
+          </div>
+          <div class="part-2">
+            <h3 class="product-title">{{ sale.title }}</h3>
+            <h4 class="price-line">
+              <span class="original-price" style="text-decoration: line-through"
+                >$150</span
+              >
+              <span class="product-price text-orange">${{ sale.price }}</span>
+            </h4>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <p>No products found.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>

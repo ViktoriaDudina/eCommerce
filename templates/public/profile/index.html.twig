@@ -1,0 +1,116 @@
+{% extends 'public/index.html.twig' %} {% block content %} {% block stylesheets
+%}
+<link rel="stylesheet" href="{{ asset('public/profile.css') }}" />
+{% endblock %}
+
+<div class="container">
+  <div class="row">
+    <div class="profile-nav col-md-3">
+      <div class="panel">
+        <div class="user-heading round">
+          <a href="#">
+            <img
+              class="img-account-profile shadow"
+              src="{{ user.avatar ?  asset('uploads/profile/' ~ user.avatar) : asset('uploads/profile/default.jpg') }}"
+              alt=""
+            />
+          </a>
+          <label class="small mb-1" for="name"
+            ><h1>{{ user.name }}</h1></label
+          >
+        </div>
+
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link .butUpd" href="{{ path('profile_update') }}">
+              <i class="fa fa-edit me-2"> </i>Update Profile</a
+            >
+          </li>
+          <li class="nav-item">
+            <form
+              form
+              method="post"
+              action="{{ path('profile_delete') }}"
+              onsubmit="return confirm('Are you sure you want to delete your account?');"
+            >
+              <button type="submit" class="nav-link butProf">
+                <i class="fa fa-trash me-2"></i>Delete Account
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="profile-info col-md-9">
+      <div class="panel">
+        <div class="bio-graph-heading">
+          <br />
+        </div>
+        <div class="panel-body bio-graph-info">
+          <div class="container p-1">
+            <h1>My Profile</h1>
+            <div class="bio-row">
+              <label class="mb-1" for="name"
+                ><span>Full Name:</span> {{ user.name }}</label
+              >
+              <hr />
+            </div>
+            <div class="bio-row">
+              <label class="mb-1" for="inputEmailAddress"
+                ><span>Email address :</span> {{ user.email }}</label
+              >
+              <hr />
+            </div>
+            <div class="bio-row">
+              <label class="mb-1" for="inputPhone"
+                ><span>Phone number :</span> {{ user.phonenumber }}
+              </label>
+            </div>
+            <h2 class="mb-4 text-orange">My Orders</h2>
+
+            {% for orderData in ordersWithTotals %}
+            <div class="table-responsive mb-4">
+              <h3>Order #{{ orderData.order.id }}</h3>
+              <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% set total = 0 %} {% for orderLine in orderData.lines %} {%
+                  set lineTotal = orderLine.quantity * orderLine.products.price
+                  %} {% set total = total + lineTotal %}
+                  <tr>
+                    <td>{{ orderLine.products.title }}</td>
+                    <td>{{ orderLine.quantity }}</td>
+                    <td>${{ lineTotal }}</td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                    <td colspan="3" class="text-center">
+                      No items in this order.
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  <tr>
+                    <td colspan="2" class="text-right">
+                      <strong>Total:</strong>
+                    </td>
+                    <td>${{ total }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+            <p class="text-muted">You have no orders yet.</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

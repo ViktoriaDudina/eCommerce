@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>{% block title %}eCommerce{% endblock %}</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="{{asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{asset('admin/plugins/toastr/toastr.min.css')}}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
+    
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper ">
+
+        <!-- Navbar -->
+
+         {% include 'admin/layout/navbar.html.twig' %}
+
+        <!-- Main Sidebar Container -->
+         {% include 'admin/layout/sidebar.html.twig' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+          {% block content %}
+            
+          {% endblock %}
+
+
+        </div>
+        <!-- /.content-wrapper -->
+
+
+        <!-- Main Footer -->
+{% include 'admin/layout/footer.html.twig' %}
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- SweetAlert2 -->
+     <script src="{{asset('admin/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+     <!-- Toastr -->
+     <script src="{{asset('admin/plugins/toastr/toastr.min.js')}}"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
+    <!-- Summernote -->
+    <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
+    {# {{-- datatable script --}} #}
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
+     {# you also have to add this script for Sommer note editor where you can control the fields   #}
+     <script src="{{ asset('admin/js/summernote.js') }}"></script>
+
+
+
+
+  </script>
+</body>
+
+</html>

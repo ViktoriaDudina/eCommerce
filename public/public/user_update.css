@@ -1,0 +1,36 @@
+body {
+    background: #f7941d;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #f7941d;
+}
+
+
+.back:hover {
+    color: #f7941d;
+    cursor: pointer;
+}
+
+.labels {
+    font-size: 11px;
+}
+
+.btn {
+    color: #f7941d;
+    border-width: 1px;
+    border-color: #f7941d;
+}
+
+.btn:hover {
+    color: #fff;
+    border-width: 1px;
+    border-color: #f7941d;
+    background-color: #f7941d;
+}
+
+.underText {
+    color: #7e7d7d;
+    font-size: 14px;
+}

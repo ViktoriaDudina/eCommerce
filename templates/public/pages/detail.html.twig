@@ -1,0 +1,388 @@
+{% extends 'public/index.html.twig' %} {% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row gx-5">
+      <aside class="col-lg-6">
+        <!-- Dynamic Product Image -->
+        <div class="border rounded-4 mb-3 d-flex justify-content-center">
+          <a
+            data-fslightbox="mygalley"
+            class="rounded-4"
+            target="_blank"
+            data-type="image"
+            href="{{ asset('uploads/products/' ~ product.image) }}"
+          >
+            <img
+              style="max-width: 100%; max-height: 100vh; margin: auto"
+              class="rounded-4 fit"
+              src="{{ asset('uploads/products/' ~ product.image) }}"
+              alt="{{ product.title }}"
+            />
+          </a>
+        </div>
+      </aside>
+      <main class="col-lg-6">
+        <div class="ps-lg-3">
+          <!-- Dynamic Product Title -->
+          <h4 class="title text-dark">
+            {{ product.title }}
+          </h4>
+
+          <!-- Dynamic Product Price -->
+          <div class="mb-3">
+            <span class="h5">${{ product.price }}</span>
+          </div>
+
+          <!-- Dynamic Product Summary -->
+          <p>{{ product.summary }}</p>
+
+          <!-- Dynamic Product Description -->
+          <p>{{ product.description }}</p>
+
+          <!-- Additional Product Details (Hardcoded for demonstration) -->
+          <div class="row">
+            <dt class="col-3">Type:</dt>
+            <dd class="col-9">T-Shirt</dd>
+
+            <dt class="col-3">Color:</dt>
+            <dd class="col-9">Brown</dd>
+
+            <dt class="col-3">Material:</dt>
+            <dd class="col-9">Cotton, Jeans</dd>
+
+            <dt class="col-3">Brand:</dt>
+            <dd class="col-9">Reebok</dd>
+          </div>
+
+          <hr />
+
+          <!-- Size and Quantity Selectors (Hardcoded) -->
+          <div class="row mb-4">
+            {#
+            <div class="col-md-4 col-6">
+              <label class="mb-2">Size</label>
+              <select
+                class="form-select border border-secondary"
+                style="height: 35px"
+              >
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+              </select>
+            </div>
+            #}
+            <div class="col-md-4 col-6 mb-3">
+              <label class="mb-2 d-block">Quantity</label>
+              <div class="input-group mb-3" style="width: 170px">
+                <button
+                  class="btn btn-white border border-secondary px-3"
+                  type="button"
+                  id="decrease-quantity"
+                  onclick="changeQuantity(-1)"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+                <input
+                  type="text"
+                  class="form-control text-center border border-secondary"
+                  placeholder="1"
+                  aria-label="Example text with button addon"
+                  aria-describedby="minusButton"
+                  input id="product-quantity"
+                  value="1"
+                />
+                <button
+                  class="btn btn-white border border-secondary px-3"
+                  type="button"
+                  id="increase-quantity"
+                  onclick="changeQuantity(1)"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <script>
+    function changeQuantity(change) {
+        var quantityInput = document.getElementById('product-quantity');
+        var currentQuantity = parseInt(quantityInput.value);
+
+        var newQuantity = currentQuantity + change;
+        if (newQuantity < 1) {
+            newQuantity = 1; // Prevent quantity from going below 1
+        }
+
+        quantityInput.value = newQuantity;
+    }
+</script>
+
+          <!-- Action Buttons (Hardcoded) -->
+
+          <a
+            href="#"
+            class="btn btn-primary shadow-0"
+            id="addToCartBtn"
+          >
+            <i class="me-1 fa fa-shopping-basket"></i> Add to cart</a
+          >
+          <a
+            href="{{ path('app_add_to_wishlist', { id: product.id }) }}"
+            class="heartbtn btn btn-light border border-secondary py-2 px-3"
+          >
+            <i class="me-1 fa fa-heart fa-lg"></i> Save</a
+          >
+          <a href="/products" class="btn btn-warning">Go Back</a>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var quantityInput = document.getElementById('product-quantity');
+    var addToCartBtn = document.getElementById('addToCartBtn');
+
+    function updateCartUrl() {
+        var quantity = quantityInput.value;
+        var url = "{{ path('app_add_to_cart', {'productId': product.id, 'quantity': 'QUANTITY'}) }}".replace('QUANTITY', quantity);
+        addToCartBtn.setAttribute('href', url);
+    }
+
+    quantityInput.addEventListener('change', updateCartUrl);
+    document.getElementById('decrease-quantity').addEventListener('click', updateCartUrl);
+    document.getElementById('increase-quantity').addEventListener('click', updateCartUrl);
+
+    // Update the URL initially
+    updateCartUrl();
+});
+</script>
+
+
+<!-- Comment Section (Hardcoded for demonstration) -->
+<div class="container">
+  <div class="row d-flex justify-content-center mb-5">
+    <div class="col-md-8 col-lg-10">
+      <div class="card shadow-0 border" style="background-color: #f0f2f5">
+        <div class="card-body p-4">
+          {#
+          <div class="form-outline mb-4">
+            #} {#
+            <input
+              type="text"
+              id="addANote"
+              class="form-control"
+              placeholder="Type comment..."
+            />
+            #} {#
+            <label class="form-label" for="addANote">+ Add a note</label> #} {#
+          </div>
+          #}
+
+          <div class="container">
+          {% if app.user %}
+              <div class="card-body p-4">
+              <div class="d-flex flex-start w-100">
+                {# <img
+                  class="rounded-circle shadow-1-strong me-3"
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                  alt="avatar"
+                  width="65"
+                  height="65"
+                /> #}
+                <div class="w-100">
+                  <h5>Add a Review</h5>
+                  <div class="form-outline">
+                    <label class="form-label" for="textAreaExample"
+                      >Share your impressions about the product</label
+                    >
+                     {{ form_start(form, {'attr': {'id': 'commentForm'}}) }}
+
+                    {{ form_row(form.comments) }}
+                    {# {{ form_row(form.ratings) }} #}
+
+
+                  </div>
+                  <div class="d-flex justify-content-between mt-3">
+                <button type="submit" class="btn btn-success">
+                    Post <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                </button>
+            </div>
+                    {{ form_end(form) }}
+                </div>
+              </div>
+            </div>
+            
+            {% else %} Please  <a href="{{ path('app_login') }}">Login</a>/<a
+              href="{{ path('app_register') }}"
+              >Register</a
+            > to Add Review
+           
+            {% endif %}
+
+            <hr />
+            <h2>Product Reviews</h2>
+            {% for review in reviews %}
+
+            <div class="card mb-4">
+              <div class="card-body">
+                <p>{{ review.comments }}</p>
+
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-row align-items-center">
+                    <img
+                      src="{{review.user.avatar ?  asset('uploads/profile/' ~ review.user.avatar) : asset('uploads/profile/default.jpg')}}"
+                      alt="avatar"
+                      width="25"
+                      height="25"
+                    />
+                    <p class="small mb-0 ms-2">{{ review.user.name }}</p>
+                  </div>
+                  {% if review.user == app.user %}
+                  <form
+                    action="{{ path('app_review_delete', { id: review.id }) }}"
+                    method="post"
+                    onsubmit="return confirm('Are you sure you want to delete this review?')"
+                  >
+                    <input type="hidden" name="_method" value="DELETE" />
+                    <button type="submit" class="btn btn-primary">
+                      Delete Review
+                    </button>
+                  </form>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endfor %} {# Display product reviews #}
+
+            <hr />
+
+            {#
+            <div class="card mb-4">
+              <div class="card-body p-4">
+                <div class="d-flex flex-start w-100">
+                  <img
+                    class="rounded-circle shadow-1-strong me-3"
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+                    alt="avatar"
+                    width="65"
+                    height="65"
+                  />
+                  <div class="w-100">
+                    <h5>Add a comment</h5>
+                    <div class="form-outline">
+                      <label class="form-label" for="textAreaExample"
+                        >Share your impressions about the product</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="textAreaExample"
+                        rows="4"
+                      ></textarea>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                      <button
+                        type="submit"
+                        form="commentForm"
+                        class="btn btn-danger"
+                      >
+                        Reset
+                      </button>
+                      <button
+                        type="reset"
+                        form="commentForm"
+                        class="btn btn-success"
+                      >
+                        Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-body">
+                <p>Love the sleek design and vibrant color!</p>
+
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-row align-items-center">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                      alt="avatar"
+                      width="25"
+                      height="25"
+                    />
+                    <p class="small mb-0 ms-2">Martha</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-body">
+                <p>
+                  This outfit is so comfy yet stylish. Perfect for any occasion!
+                </p>
+
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-row align-items-center">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                      alt="avatar"
+                      width="25"
+                      height="25"
+                    />
+                    <p class="small mb-0 ms-2">Johny</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-body">
+                <p>
+                  The fabric feels amazing, and the fit is just right. A
+                  must-have!
+                </p>
+
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-row align-items-center">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(31).webp"
+                      alt="avatar"
+                      width="25"
+                      height="25"
+                    />
+                    <p class="small mb-0 ms-2">Mary Kate</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <p>Absolutely stunning! The attention to detail is impressiv</p>
+
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-row align-items-center">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                      alt="avatar"
+                      width="25"
+                      height="25"
+                    />
+                    <p class="small mb-0 ms-2">Johny</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            #}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

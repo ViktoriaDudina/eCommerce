@@ -1,0 +1,53 @@
+<!-- Client 1 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5 py-xl-8">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+        <h2 class="mb-4 display-5 text-center text-orange">Top Brands</h2>
+        <p class="mb-5 text-center">
+          Orci varius natoque penatibus et magnis dis parturient montes,
+          nascetur ridiculus mus. Pellentesque et neque id ligula mattis
+          commodo.
+        </p>
+        <hr class="w-50 mx-auto mb-5 mb-xl-9" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container overflow-hidden">
+    <div id="brandCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+      <div class="carousel-inner">
+        {% for brandChunk in brands|batch(4) %}
+          <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+            <div class="row">
+              {% for brand in brandChunk %}
+                <div class="col">
+                  <img src="{{ asset('uploads/brands/' ~ brand.image)  }}" alt="{{ brand.name }}" class="d-block img-fluid" />
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#brandCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#brandCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>

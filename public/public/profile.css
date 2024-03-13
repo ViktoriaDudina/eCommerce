@@ -1,0 +1,117 @@
+body {
+    color: #070202;
+    background: #f1f2f7;
+    font-size: 14px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-nav,
+.profile-info {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.user-heading {
+    background: #F7941D;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+    padding: 30px;
+    text-align: center;
+}
+
+.user-heading.round a {
+    border-radius: 50%;
+    border: 10px solid rgba(255, 255, 255, 0.3);
+    display: inline-block;
+}
+
+.user-heading a img {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+}
+
+.user-heading h1 {
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.user-heading p {
+    font-size: 12px;
+}
+
+.nav-pills>.nav-item>.nav-link {
+    border-radius: 0;
+    color: #070202;
+    background-color: white;
+}
+
+.nav-pills>.nav-item>.nav-link:hover {
+    border-radius: 0;
+    color: #F7941D;
+    background-color: white;
+
+}
+
+.butProf {
+    color: #070202;
+    background-color: white;
+    width: 100%;
+    text-align: left;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.butProf:hover {
+    color: #F7941D;
+}
+
+.bio-graph-heading {
+    background: #F7941D;
+    color: #fff;
+    text-align: center;
+    padding: 15px 3px;
+    border-radius: 4px 4px 0 0;
+
+}
+
+.bio-graph-info {
+    color: #070202;
+    background-color: white;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.bio-graph-info h1 {
+    font-size: 22px;
+    font-weight: 300;
+    margin: 10px 0 38px;
+    text-align: center;
+}
+
+.bio-row {
+
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.bio-row label span {
+    width: 110px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.row {
+    font-family: 'Open Sans', sans-serif;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .user-heading.round {
+        padding: 15px 15px 15px 15px;
+    }
+}

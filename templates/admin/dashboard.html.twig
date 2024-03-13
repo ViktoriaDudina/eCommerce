@@ -1,0 +1,213 @@
+{% extends 'admin/index.html.twig' %}
+{% block content %}
+    <!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row shadow-sm p-3 mt-2 mb-2 bg-white rounded">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active"> Dashboard</li>
+                </ol>
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <h5 class="mb-2">Info Box</h5>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total Orders</span>
+                        <span class="info-box-number">{{ totalOrders }}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Reviews</span>
+                        <span class="info-box-number">{{totalReviews}}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total Products</span>
+                        <span class="info-box-number">{{totalProducts}}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total Brands</span>
+                        <span class="info-box-number">{{totalBrands}}</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+        {# data table starts  #}
+        {# <div class="card">
+
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trident</td>
+                            <td>Internet
+                                Explorer 4.0
+                            </td>
+                            <td>Win 95+</td>
+                            <td> 4</td>
+                            <td>X</td>
+                        </tr>
+                        <tr>
+                            <td>Trident</td>
+                            <td>Internet
+                                Explorer 5.0
+                            </td>
+                            <td>Win 95+</td>
+                            <td>5</td>
+                            <td>C</td>
+                        </tr>
+                        <tr>
+                            <td>Trident</td>
+                            <td>Internet
+                                Explorer 5.5
+                            </td>
+                            <td>Win 95+</td>
+                            <td>5.5</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Trident</td>
+                            <td>Internet
+                                Explorer 6
+                            </td>
+                            <td>Win 98+</td>
+                            <td>6</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Trident</td>
+                            <td>Internet Explorer 7</td>
+                            <td>Win XP SP2+</td>
+                            <td>7</td>
+                            <td>A</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Misc</td>
+                            <td>NetFront 3.4</td>
+                            <td>Embedded devices</td>
+                            <td>-</td>
+                            <td>A</td>
+                        </tr>
+                        <tr>
+                            <td>Misc</td>
+                            <td>Dillo 0.8</td>
+                            <td>Embedded devices</td>
+                            <td>-</td>
+                            <td>X</td>
+                        </tr>
+                        <tr>
+                            <td>Misc</td>
+                            <td>Links</td>
+                            <td>Text only</td>
+                            <td>-</td>
+                            <td>X</td>
+                        </tr>
+                        <tr>
+                            <td>Misc</td>
+                            <td>Lynx</td>
+                            <td>Text only</td>
+                            <td>-</td>
+                            <td>X</td>
+                        </tr>
+                        <tr>
+                            <td>Misc</td>
+                            <td>IE Mobile</td>
+                            <td>Windows Mobile 6</td>
+                            <td>-</td>
+                            <td>C</td>
+                        </tr>
+                        <tr>
+                            <td>Misc</td>
+                            <td>PSP browser</td>
+                            <td>PSP</td>
+                            <td>-</td>
+                            <td>C</td>
+                        </tr>
+                        <tr>
+                            <td>Other browsers</td>
+                            <td>All others</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>U</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div> #}
+         {# data tables end  #}
+
+        
+
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+{% endblock %}

@@ -1,0 +1,158 @@
+<div class="superNav border-bottom py-2 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 centerOnMobile">
+        <span
+          class="d-none d-lg-inline-block d-md-inline-block d-sm-none d-xs-none me-3"
+          ><strong
+            ><i class="fa-regular fa-envelope pe-1" style="color: #f7941d"></i
+            >info@bestclothes.com</strong
+          ></span
+        >
+      </div>
+      <div
+        class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-lg-block d-md-block-d-sm-block d-xs-none text-end"
+      >
+        {% if app.user %} {# User is authenticated, show profile and logout
+        button #}
+        <span class="me-3">
+          <i class="fa-solid fa-user me-1" style="color: #f7941d"></i>
+          <a class="text-muted no-underline" href="{{ path('app_profile') }}"
+            >My Profile</a
+          >
+        </span>
+        <span class="me-3">
+          <i class="fa-solid fa-sign-out-alt me-1" style="color: #f7941d"></i>
+          <a class="text-muted no-underline" href="{{ path('app_logout') }}"
+            >Logout</a
+          >
+        </span>
+        {% else %} {# User is not authenticated, show login and register links
+        #}
+        <span class="me-3">
+          <i class="fa-solid fa-user me-1" style="color: #f7941d"></i>
+          <a class="text-muted no-underline" href="{{ path('app_login') }}"
+            >Login</a
+          >
+        </span>
+        <span class="me-3">
+          <i class="fa-solid fa-file me-2" style="color: #f7941d"></i>
+          <a class="text-muted no-underline" href="{{ path('app_register') }}"
+            >Register</a
+          >
+        </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<nav
+  class="navbar navbar-expand-lg bg-dark sticky-top navbar-light p-3 shadow-sm"
+  data-bs-theme="dark"
+>
+  <div class="container">
+    <a class="navbar-brand" href="#"
+      ><i class="fa-solid fa-shop me-2" style="color: #f7941d"></i>
+      <strong>BEST CLOTHES</strong></a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <div class="ms-auto d-flex align-items-center">
+        <form
+          action="{{ path('app_search') }}"
+          method="get"
+          class="d-flex my-2 my-lg-0"
+        >
+          <div class="input-group">
+            <span class="input-group-text bg-orange text-white border-warning">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input
+              type="search"
+              class="form-control border-warning"
+              placeholder="Search..."
+              name="query"
+              style="color: white"
+            />
+            <button class="btn btn-warning text-white bg-orange" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+      <ul class="navbar-nav ms-auto custom-navbar_font">
+        <li class="nav-item">
+          <a
+            class="nav-link mx-2 text-uppercase active"
+            aria-current="page"
+            href="/"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase" href="/products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase" href="/contact">Contact Us</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto custom-navbar_font">
+        <li class="nav-item">
+          <a
+            class="nav-link mx-2 text-uppercase"
+            href="{{ path('app_wishlist') }}"
+          >
+            <i
+              class="fa-solid fa-heart me-1"
+              style="color: #f7941d; position: relative"
+            >
+              <span
+                class="badge bg-warning text-dark"
+                style="
+                  position: absolute;
+                  top: -8px;
+                  right: -8px;
+                  font-size: 8px;
+                "
+              ></span>
+            </i>
+            Wishlist
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mx-2 text-uppercase" href="{{ path('app_cart') }}">
+            <i
+              class="fa-solid fa-cart-shopping me-1"
+              style="color: #f7941d; position: relative"
+            >
+              {% if cartItemCount is defined and cartItemCount > 0 %}
+              <span
+                class="badge bg-warning text-dark"
+                style="
+                  position: absolute;
+                  top: -8px;
+                  right: -8px;
+                  font-size: 8px;
+                "
+                >{{ cartItemCount }}</span
+              >
+              {% endif %}
+            </i>
+            Cart
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

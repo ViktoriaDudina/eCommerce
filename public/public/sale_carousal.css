@@ -1,0 +1,127 @@
+swiper-container {
+    width: 100%;
+    height: 100%;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #F7F7F7;
+}
+
+swiper-slide {
+    text-align: left;
+    font-size: 18px;
+    /*background: #F7F7F7;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgcar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pcar {
+    font-size: 1rem;
+}
+
+.carh2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #444444;
+}
+
+.hrcar {
+    max-width: 140px;
+}
+
+.nextcont {
+    margin-top: 100px;
+}
+
+.card {
+    height: 302px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 198px;
+    ;
+}
+
+@media (max-width: 768px) {
+    .card {
+        height: 280px;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 190px;
+    }
+
+    .card-title {
+        font-size: 14px;
+    }
+
+    .pcar {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 426px) {
+    .card {
+        height: 160px;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 90px;
+    }
+
+    .card-title {
+        font-size: 8px;
+    }
+
+    .pcar {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 376px) {
+    .card {
+        height: 155px;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 78px;
+    }
+
+    .card-title {
+        font-size: 8px;
+    }
+
+    .pcar {
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 321px) {
+    .card {
+        height: 110px;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 58px;
+    }
+
+    .card-title {
+        font-size: 4px;
+    }
+
+    .pcar {
+        font-size: 4px;
+    }
+}
